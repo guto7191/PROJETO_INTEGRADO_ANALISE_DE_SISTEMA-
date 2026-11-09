@@ -38,6 +38,93 @@ def sect_portrait(hdr_rid):
             f'w:header="{int(1.25 * CM)}" w:footer="{int(1.25 * CM)}" w:gutter="0"/></w:sectPr>')
 
 
+TEXT_W_PORTRAIT = 21 * CM - 5 * CM           # 16 cm úteis
+TEXT_W_LANDSCAPE = int(29.7 * CM) - 5 * CM   # 24,7 cm úteis
+CELL_PAD = 2 * 57 + 40                       # margens internas da célula + folga (twips)
+_FONTS = {}
+
+
+def text_twips(word, bold):
+    """Largura de uma palavra em Arial 10 pt (métrica Liberation Sans), em twips."""
+    from PIL import ImageFont
+    if bold not in _FONTS:
+        _FONTS[bold] = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-%s.ttf"
+                                          % ("Bold" if bold else "Regular"), 100)
+    return _FONTS[bold].getlength(word) / 10 * 20        # 100 px -> 10 pt; 1 pt = 20 twips
+
+
+def fix_table(tbl, width):
+    rows = re.findall(r"<w:tr>.*?</w:tr>", tbl, re.S)
+    cells = [[re.sub(r"<[^>]+>", " ", c).split() for c in re.findall(r"<w:tc>.*?</w:tc>", r, re.S)] for r in rows]
+    ncol = max(len(r) for r in cells)
+    minw = [0.0] * ncol
+    weight = [0.0] * ncol
+    for ri, r in enumerate(cells):
+        for ci, words in enumerate(r):
+            for w in words:
+                minw[ci] = max(minw[ci], text_twips(w, ri == 0) + CELL_PAD)
+            weight[ci] += text_twips(" ".join(words), ri == 0)
+    rest = width - sum(minw)
+    if rest < 0:
+        sys.exit(f"ERRO: tabela não cabe sem quebrar palavras ({sum(minw):.0f} > {width} twips)")
+    total = sum(weight) or 1
+    cols = [int(minw[i] + rest * weight[i] / total) for i in range(ncol)]
+    cols[-1] += width - sum(cols)
+    tbl = re.sub(r'<w:tblW [^>]*/>', f'<w:tblW w:type="dxa" w:w="{width}" /><w:tblLayout w:type="fixed" />', tbl, 1)
+    tbl = re.sub(r"<w:tblGrid>.*?</w:tblGrid>",
+                 "<w:tblGrid>" + "".join(f'<w:gridCol w:w="{c}" />' for c in cols) + "</w:tblGrid>", tbl, 1, re.S)
+
+    def fix_row(m):
+        row = m.group(0)
+        i = iter(cols)
+        row = re.sub(r"<w:tcPr />|<w:tcPr>", lambda _: f'<w:tcPr><w:tcW w:type="dxa" w:w="{next(i)}" />'
+                     + ("</w:tcPr>" if _.group(0) == "<w:tcPr />" else ""), row)
+        if "<w:trPr>" in row:
+            row = row.replace("<w:trPr>", "<w:trPr><w:cantSplit />", 1)
+        else:
+            row = row.replace("<w:tr>", "<w:tr><w:trPr><w:cantSplit /></w:trPr>", 1)
+        return row
+    tbl = re.sub(r"<w:tr>.*?</w:tr>", fix_row, tbl, flags=re.S)
+    if tbl.count("tblHeader") != 1:
+        sys.exit("ERRO: o cabeçalho repetido deve estar só na primeira linha da tabela")
+    return tbl
+
+
+def build_toc(doc):
+    """Preenche o campo TOC com os títulos (níveis 1 e 2) e links para eles, já no arquivo.
+
+    Editores que não calculam campos (Google Docs) mostram o sumário pronto; o Word ainda pode
+    recalculá-lo (com números de página) porque o campo TOC continua em volta das entradas.
+    """
+    entries = []
+
+    def mark(m):
+        k = len(entries)
+        lvl, body = m.group(1), m.group(0)
+        text = "".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", body))
+        entries.append((lvl, text, f"_Toc{k:04d}"))
+        body = body.replace("</w:pPr>", f'</w:pPr><w:bookmarkStart w:id="{900 + k}" w:name="_Toc{k:04d}"/>', 1)
+        return body[:-len("</w:p>")] + f'<w:bookmarkEnd w:id="{900 + k}"/></w:p>'
+    doc = re.sub(r'<w:p><w:pPr><w:pStyle w:val="Heading([12])" />(?:(?!</w:p>).)*</w:p>', mark, doc, flags=re.S)
+    if not entries:
+        sys.exit("ERRO: nenhum título encontrado para o sumário")
+
+    def entry(lvl, text, anchor, prefix="", suffix=""):
+        return (f'<w:p><w:pPr><w:pStyle w:val="TOC{lvl}"/></w:pPr>{prefix}'
+                f'<w:hyperlink w:anchor="{anchor}" w:history="1"><w:r><w:t xml:space="preserve">{text}</w:t></w:r>'
+                f'</w:hyperlink>{suffix}</w:p>')
+    begin = ('<w:r><w:fldChar w:fldCharType="begin" w:dirty="true"/></w:r><w:r><w:instrText xml:space="preserve">'
+             ' TOC \\o "1-2" \\h \\z \\u </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>')
+    end = '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
+    paras = []
+    for i, (lvl, text, anchor) in enumerate(entries):
+        paras.append(entry(lvl, text, anchor, begin if i == 0 else "", end if i == len(entries) - 1 else ""))
+    pat = re.compile(r'<w:p><w:r><w:fldChar w:fldCharType="begin" w:dirty="true"/></w:r>.*?Atualize o sumário.*?</w:p>', re.S)
+    if len(pat.findall(doc)) != 1:
+        sys.exit("ERRO: campo do sumário não encontrado exatamente uma vez")
+    return pat.sub(lambda _: "".join(paras), doc), len(entries)
+
+
 def no_break_on_next_heading(doc, start):
     """Desliga a quebra de página do primeiro Heading1 depois de 'start'."""
     i = doc.index('<w:pStyle w:val="Heading1" />', start)
@@ -83,8 +170,15 @@ def main():
     if 'xmlns:r=' not in doc[:2000]:
         doc = doc.replace("<w:document ", f"<w:document {R_NS} ", 1)
 
-    # 4 repetir cabeçalho das tabelas
-    doc = re.sub(r"(<w:tbl>.*?<w:tr>)(?!\s*<w:trPr>)", r"\1<w:trPr><w:tblHeader/></w:trPr>", doc, flags=re.S)
+    # 4 tabelas: larguras pela palavra mais longa, cabeçalho repetido só na 1ª linha, linhas sem quebra
+    landscape_from = doc.index('r:id="rIdHdrNum"')          # depois desta quebra, a seção é paisagem
+    doc = re.sub(r"<w:tbl>.*?</w:tbl>",
+                 lambda m: fix_table(m.group(0), TEXT_W_LANDSCAPE if m.start() > landscape_from else TEXT_W_PORTRAIT),
+                 doc, flags=re.S)
+
+    # 4b sumário já preenchido (títulos + links)
+    doc, n_toc = build_toc(doc)
+    print("sumário com", n_toc, "entradas")
 
     files["word/document.xml"] = doc.encode("utf-8")
 
