@@ -45,6 +45,15 @@ Prioridade: Alta = sem ele o processo central (oportunidade → compatibilidade 
 | RF16 | Consultar empresas por oportunidade | O sistema deve permitir que o Gestor consulte as empresas que atuam nos setores de uma oportunidade e as que já manifestaram interesse nela. | Média | Gestor | RN-MM-14, Q-04, Q-05 |
 | RF17 | Listar oportunidades sem docentes compatíveis | O sistema deve permitir que o Gestor liste as oportunidades que ainda não possuem docentes compatíveis identificados. | Média | Gestor | Q-06, RN12 |
 
-## Cobertura
-- Cadastros simples: RF01 a RF05 e RF06 (registro da oportunidade, tratado como cadastro por prudência) = 6 de 18 (33%, limite de 40%). Transacionais: RF07 a RF18 = 12 de 18 (67%).
-- Q-01: RF14 · Q-02: RF11, RF14 · Q-03: RF15 · Q-04: RF16 · Q-05: RF16 · Q-06: RF17 · Q-07: RF11.
+## Natureza dos requisitos funcionais
+
+Os 18 requisitos funcionais foram classificados pela natureza da operação, para mostrar que o ProspectaUni não se limita a cadastros.
+
+| Natureza | O que o sistema faz | Requisitos | Qtd. | % |
+|---|---|---|---|---|
+| Cadastro | Inclui, altera e inativa dados básicos | RF01 a RF06 | 6 | 33% |
+| Processamento e regras | Calcula o grau de aderência, valida compatibilidades, seleciona docentes, controla o ciclo de vida e registra interesse, propostas e desfechos | RF07 a RF10, RF12, RF13, RF18 | 7 | 39% |
+| Consultas cruzadas | Responde às perguntas do minimundo cruzando docentes, portfólios, setores e empresas | RF11, RF14 a RF17 | 5 | 28% |
+| **Total** | | | **18** | **100%** |
+
+Dois em cada três requisitos (67%) envolvem cálculo, validação, mudança de estado ou cruzamento de informações. O registro de desafio/oportunidade (RF06) foi contado como cadastro, embora inicie o ciclo de vida, para não superestimar a complexidade do sistema. As sete perguntas que o minimundo espera responder (Q-01 a Q-07) são atendidas por ao menos um requisito funcional; a correspondência completa está no arquivo 06-matriz-rastreabilidade.md.

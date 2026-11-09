@@ -8,8 +8,9 @@ Uso: python3 -I docs/ferramentas/pos_docx.py <arquivo.docx>
      @@SECAO_RETRATO@@    -> fim da seção 2 (texto, retrato, com número)
    A seção final (Apêndice B) vem do reference.docx em paisagem e recebe o cabeçalho com número.
 3. Evita página em branco: o primeiro título de cada seção nova não quebra página de novo.
-4. Repete a linha de cabeçalho das tabelas em cada página.
-5. Pede ao Word para atualizar os campos (sumário) ao abrir.
+4. Tabelas: larguras pela palavra mais longa, cabeçalho repetido só na 1ª linha, linhas sem quebra.
+5. Títulos de nível 1 em maiúsculas. O sumário é inserido no Google Docs (Inserir → Índice);
+   ver docs/fase1/COMO_INSERIR_SUMARIO.md.
 Para com erro se algum marcador não aparecer exatamente uma vez.
 """
 import re
@@ -90,39 +91,23 @@ def fix_table(tbl, width):
     return tbl
 
 
-def build_toc(doc):
-    """Preenche o campo TOC com os títulos (níveis 1 e 2) e links para eles, já no arquivo.
+def upper_headings(doc):
+    """Grava em maiúsculas o texto dos títulos de nível 1, da capa e do título do sumário (ABNT).
 
-    Editores que não calculam campos (Google Docs) mostram o sumário pronto; o Word ainda pode
-    recalculá-lo (com números de página) porque o campo TOC continua em volta das entradas.
+    O Google Docs ignora a formatação "caixa alta" do Word; com o texto já em maiúsculas,
+    corpo, índice do Docs e PDF ficam iguais em qualquer editor.
     """
-    entries = []
+    n = [0]
 
-    def mark(m):
-        k = len(entries)
-        lvl, body = m.group(1), m.group(0)
-        text = "".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", body))
-        entries.append((lvl, text, f"_Toc{k:04d}"))
-        body = body.replace("</w:pPr>", f'</w:pPr><w:bookmarkStart w:id="{900 + k}" w:name="_Toc{k:04d}"/>', 1)
-        return body[:-len("</w:p>")] + f'<w:bookmarkEnd w:id="{900 + k}"/></w:p>'
-    doc = re.sub(r'<w:p><w:pPr><w:pStyle w:val="Heading([12])" />(?:(?!</w:p>).)*</w:p>', mark, doc, flags=re.S)
-    if not entries:
-        sys.exit("ERRO: nenhum título encontrado para o sumário")
-
-    def entry(lvl, text, anchor, prefix="", suffix=""):
-        return (f'<w:p><w:pPr><w:pStyle w:val="TOC{lvl}"/></w:pPr>{prefix}'
-                f'<w:hyperlink w:anchor="{anchor}" w:history="1"><w:r><w:t xml:space="preserve">{text}</w:t></w:r>'
-                f'</w:hyperlink>{suffix}</w:p>')
-    begin = ('<w:r><w:fldChar w:fldCharType="begin" w:dirty="true"/></w:r><w:r><w:instrText xml:space="preserve">'
-             ' TOC \\o "1-2" \\h \\z \\u </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>')
-    end = '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
-    paras = []
-    for i, (lvl, text, anchor) in enumerate(entries):
-        paras.append(entry(lvl, text, anchor, begin if i == 0 else "", end if i == len(entries) - 1 else ""))
-    pat = re.compile(r'<w:p><w:r><w:fldChar w:fldCharType="begin" w:dirty="true"/></w:r>.*?Atualize o sumário.*?</w:p>', re.S)
-    if len(pat.findall(doc)) != 1:
-        sys.exit("ERRO: campo do sumário não encontrado exatamente uma vez")
-    return pat.sub(lambda _: "".join(paras), doc), len(entries)
+    def up(m):
+        n[0] += 1
+        return re.sub(r"(<w:t[^>]*>)([^<]*)(</w:t>)", lambda t: t.group(1) + t.group(2).upper() + t.group(3), m.group(0))
+    doc = re.sub(r'<w:p><w:pPr><w:pStyle w:val="Heading1" />(?:(?!</w:p>).)*</w:p>', up, doc, flags=re.S)
+    h1 = n[0]
+    # capa e título do sumário também usam caixa alta (ABNT)
+    doc = re.sub(r'<w:p><w:pPr><w:pStyle w:val="(?:CapaInstituicao|CapaAutores|CapaTitulo|SumarioTitulo)" ?/>'
+                 r'(?:(?!</w:p>).)*</w:p>', up, doc, flags=re.S)
+    return doc, h1
 
 
 def no_break_on_next_heading(doc, start):
@@ -176,17 +161,12 @@ def main():
                  lambda m: fix_table(m.group(0), TEXT_W_LANDSCAPE if m.start() > landscape_from else TEXT_W_PORTRAIT),
                  doc, flags=re.S)
 
-    # 4b sumário já preenchido (títulos + links)
-    doc, n_toc = build_toc(doc)
-    print("sumário com", n_toc, "entradas")
+    # 4b títulos de nível 1 em maiúsculas (o sumário é o índice nativo do Google Docs)
+    doc, n_h1 = upper_headings(doc)
+    if n_h1 == 0:
+        sys.exit("ERRO: nenhum título de nível 1 encontrado")
 
     files["word/document.xml"] = doc.encode("utf-8")
-
-    # 5 atualizar campos ao abrir
-    st = files["word/settings.xml"].decode()
-    if "updateFields" not in st:
-        st = re.sub(r"(<w:zoom [^>]*/>)", r'\1<w:updateFields w:val="true"/>', st, count=1)
-    files["word/settings.xml"] = st.encode()
 
     with zipfile.ZipFile(PATH, "w", zipfile.ZIP_DEFLATED) as out:
         for n, b in files.items():

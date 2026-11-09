@@ -62,3 +62,7 @@
 | D57 | 2026-11-09 | Local da capa | Cruz das Almas – BA, 2026. | Consolidado (capa) |
 | D58 | 2026-11-09 | Numeração de subseções | Subseções continuam sem número; só as seções principais são numeradas. | Consolidado |
 | D59 | 2026-11-09 | Ferramentas e versionamento | Gerador de diagramas, renderizador, modelo de estilos e build_docx.sh versionados em docs/; commit em uma branch nova fase-1. | Repositório |
+| D60 | 2026-11-09 | Sumário do documento | Índice nativo do Google Docs (Inserir → Índice, com números de página), inserido pelo usuário na página SUMÁRIO reservada; passo a passo em COMO_INSERIR_SUMARIO.md. Títulos de nível 1, capa e "SUMÁRIO" gravados em maiúsculas reais, porque o Docs ignora a caixa alta por formatação. | Consolidado, pos_docx.py |
+| D61 | 2026-11-09 | Listas de quadros e de figuras | Não incluir. | Consolidado |
+| D62 | 2026-11-09 | Formato do sumário | Dois níveis, o 2º recuado; nível 1 em negrito (aplicado no Docs). | Consolidado |
+| D63 | 2026-11-09 | Seção "Cobertura" | Reescrita como "Natureza dos requisitos funcionais", com o novo Quadro 8 (cadastro 6, processamento e regras 7, consultas cruzadas 5); retirada a lista Q→RF, que divergia do Apêndice A; quadros renumerados de 1 a 13. | 03, Consolidado |

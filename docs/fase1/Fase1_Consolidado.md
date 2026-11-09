@@ -29,7 +29,7 @@ Cruz das Almas – BA\
 
 ```{=openxml}
 <w:p><w:pPr><w:pStyle w:val="SumarioTitulo"/></w:pPr><w:r><w:t>Sumário</w:t></w:r></w:p>
-<w:p><w:r><w:fldChar w:fldCharType="begin" w:dirty="true"/></w:r><w:r><w:instrText xml:space="preserve"> TOC \o "1-2" \h \z \u </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>Atualize o sumário: clique com o botão direito aqui e escolha "Atualizar campo" (ou tecle F9).</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>
+<w:p/>
 <w:p><w:r><w:t>@@SECAO_SEM_NUMERO@@</w:t></w:r></w:p>
 ```
 
@@ -171,9 +171,24 @@ Table: Quadro 7 — Requisitos funcionais — módulo Consultas
 Fonte: elaborado pelos autores (2026).
 :::
 
-## Cobertura
-- Cadastros simples: RF01 a RF05 e RF06 (registro da oportunidade, tratado como cadastro por prudência) = 6 de 18 (33%, limite de 40%). Transacionais: RF07 a RF18 = 12 de 18 (67%).
-- Q-01: RF14 · Q-02: RF11, RF14 · Q-03: RF15 · Q-04: RF16 · Q-05: RF16 · Q-06: RF17 · Q-07: RF11.
+## Natureza dos requisitos funcionais
+
+Os 18 requisitos funcionais foram classificados pela natureza da operação, para mostrar que o ProspectaUni não se limita a cadastros. O Quadro 8 resume a classificação.
+
+| Natureza | O que o sistema faz | Requisitos | Qtd. | % |
+|---|---|---|---|---|
+| Cadastro | Inclui, altera e inativa dados básicos | RF01 a RF06 | 6 | 33% |
+| Processamento e regras | Calcula o grau de aderência, valida compatibilidades, seleciona docentes, controla o ciclo de vida e registra interesse, propostas e desfechos | RF07 a RF10, RF12, RF13, RF18 | 7 | 39% |
+| Consultas cruzadas | Responde às perguntas do minimundo cruzando docentes, portfólios, setores e empresas | RF11, RF14 a RF17 | 5 | 28% |
+| **Total** | | | **18** | **100%** |
+
+Table: Quadro 8 — Natureza dos requisitos funcionais
+
+::: {custom-style="Fonte"}
+Fonte: elaborado pelos autores (2026).
+:::
+
+Dois em cada três requisitos (67%) envolvem cálculo, validação, mudança de estado ou cruzamento de informações. O registro de desafio/oportunidade (RF06) foi contado como cadastro, embora inicie o ciclo de vida, para não superestimar a complexidade do sistema. As sete perguntas que o minimundo espera responder (Q-01 a Q-07) são atendidas por ao menos um requisito funcional; a correspondência completa está no Quadro 12 (Apêndice A).
 
 # 4 Requisitos Não Funcionais
 
@@ -187,7 +202,7 @@ Fonte: elaborado pelos autores (2026).
 | RNF06 | Disponibilidade | O sistema deve estar disponível no horário de uso do departamento. | Disponibilidade mínima de 95% por mês, em horário comercial (segunda a sexta, das 8h às 18h). | Diretriz |
 | RNF07 | Manutenibilidade | A nota mínima de sugestão, os pesos da fórmula do grau de aderência e o teto de projetos anteriores devem poder ser alterados sem reescrever o sistema, e o histórico de mudanças de estado das oportunidades deve ser conservado. | Cada parâmetro (RN02, RN04) é alterável por configuração, sem nova versão do sistema; histórico de mudanças de estado guardado por 5 anos. | RN02, RN04, RF07, D21, D23, D37 |
 
-Table: Quadro 8 — Requisitos não funcionais
+Table: Quadro 9 — Requisitos não funcionais
 
 ::: {custom-style="Fonte"}
 Fonte: elaborado pelos autores (2026).
@@ -211,7 +226,7 @@ Fonte: elaborado pelos autores (2026).
 | RN12 | Oportunidade sem docentes compatíveis | Uma oportunidade é considerada sem docentes compatíveis quando nenhum docente atinge a nota mínima (RN04) e nenhuma compatibilidade foi registrada manualmente. | Derivação | RF17 | Q-06, RN-MM-13, D23 |
 | RN13 | Proposta registrada antes da negociação | Uma oportunidade só passa de Proposta em elaboração para Em negociação se houver ao menos uma proposta registrada. Cada proposta se destina a uma única empresa com manifestação de interesse na oportunidade e inclui os docentes selecionados; cada empresa interessada recebe no máximo uma proposta por oportunidade. | Restrição | RF07, RF18 | D1, D28, D30, D32, D50 |
 
-Table: Quadro 9 — Regras de negócio
+Table: Quadro 10 — Regras de negócio
 
 ::: {custom-style="Fonte"}
 Fonte: elaborado pelos autores (2026).
@@ -239,7 +254,7 @@ Fonte: elaborado pelos autores (2026).
 | RN-MM-15 | Registro de compatibilidade com justificativa e grau de aderência | RF08, RF09 | RN02, RN04, RN05, RN06 |
 | RN-MM-16 | Consulta de portfólios para apoiar a seleção | RF10, RF11, RF14 | RN03 |
 
-Table: Quadro 10 — Regras do minimundo (RN-MM) × requisitos e regras de negócio
+Table: Quadro 11 — Regras do minimundo (RN-MM) × requisitos e regras de negócio
 
 ::: {custom-style="Fonte"}
 Fonte: elaborado pelos autores (2026).
@@ -256,7 +271,7 @@ Fonte: elaborado pelos autores (2026).
 | Q-06 | Oportunidades sem docentes compatíveis | RF17 | RN12 |
 | Q-07 | Docentes com experiência em projetos semelhantes | RF11 | RN03 |
 
-Table: Quadro 11 — Perguntas do minimundo (Q-01 a Q-07) × requisitos e regras de negócio
+Table: Quadro 12 — Perguntas do minimundo (Q-01 a Q-07) × requisitos e regras de negócio
 
 ::: {custom-style="Fonte"}
 Fonte: elaborado pelos autores (2026).
@@ -284,7 +299,7 @@ Figura 1 — Diagrama de contexto do ProspectaUni
 
 ::: {custom-style="Fonte"}
 Fonte: elaborado pelos autores (2026).\
-Nota: o sistema (azul escuro), dentro de sua fronteira, troca seis fluxos de informação (F1 a F6) com os três atores (cinza); o Quadro 12 detalha cada fluxo e seus requisitos funcionais. Sistemas acadêmicos externos ficam fora do escopo.
+Nota: o sistema (azul escuro), dentro de sua fronteira, troca seis fluxos de informação (F1 a F6) com os três atores (cinza); o Quadro 13 detalha cada fluxo e seus requisitos funcionais. Sistemas acadêmicos externos ficam fora do escopo.
 :::
 
 | Fluxo | De → Para | Informação | RFs |
@@ -296,7 +311,7 @@ Nota: o sistema (azul escuro), dentro de sua fronteira, troca seis fluxos de inf
 | F5 | Docente → Sistema | Expertises e portfólio acadêmico | RF03, RF05 |
 | F6 | Representante de Empresa → Sistema | Manifestação de interesse em oportunidade do seu setor | RF12 |
 
-Table: Quadro 12 — Fluxos de informação do diagrama de contexto
+Table: Quadro 13 — Fluxos de informação do diagrama de contexto
 
 ::: {custom-style="Fonte"}
 Fonte: elaborado pelos autores (2026).
