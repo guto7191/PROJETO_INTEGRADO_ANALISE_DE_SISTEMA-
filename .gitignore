@@ -1,0 +1,25 @@
+# Sistema operacional / editores
+.DS_Store
+Thumbs.db
+*~
+*.swp
+.vscode/
+.idea/
+
+# Arquivos temporários do Word/LibreOffice (lock files)
+~$*
+.~lock.*#
+
+# Configurações locais do Claude Code (pessoais, não versionar)
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Extrações temporárias de PDF e rascunhos
+*.tmp
+tmp/
+docs/**/*.txt
+
+# Python (caso python-docx seja usado para gerar o .docx)
+__pycache__/
+*.pyc
+.venv/
