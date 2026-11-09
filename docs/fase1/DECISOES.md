@@ -66,3 +66,7 @@
 | D61 | 2026-11-09 | Listas de quadros e de figuras | Não incluir. | Consolidado |
 | D62 | 2026-11-09 | Formato do sumário | Dois níveis, o 2º recuado; nível 1 em negrito (aplicado no Docs). | Consolidado |
 | D63 | 2026-11-09 | Seção "Cobertura" | Reescrita como "Natureza dos requisitos funcionais", com o novo Quadro 8 (cadastro 6, processamento e regras 7, consultas cruzadas 5); retirada a lista Q→RF, que divergia do Apêndice A; quadros renumerados de 1 a 13. | 03, Consolidado |
+| D64 | 2026-11-09 | Códigos de decisão (D) no documento | Removidos da coluna Origem do Fase1_Consolidado; ficam só neste registro interno e nos arquivos de trabalho (02 a 06). | Consolidado |
+| D65 | 2026-11-09 | Origem de RN08, RN09 e RN13 sem os códigos D | RN08 e RN09: "Minimundo, seção 4" (exemplo prático: selecionar docentes, elaborar proposta, iniciar negociação); RN13: "RN-MM-14, Minimundo, seção 4". | Consolidado |
+| D66 | 2026-11-09 | Origem "Diretriz" | RNF04: "LGPD (Lei 13.709/2018)"; RNF06: "—". | Consolidado |
+| D67 | 2026-11-09 | Explicação dos códigos | Nota abaixo de cada quadro, junto da Fonte, definindo só os códigos presentes (RF, RNF, RN, RN-MM, Q, F, LGPD); gerada por docs/ferramentas/notas_quadros.py. | Consolidado |

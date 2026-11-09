@@ -70,23 +70,24 @@ O ProspectaUni reúne em um só lugar docentes, portfólios, setores, empresas e
 | Termo | Definição | Origem |
 |----------------------|---------------------------------------------------------------|---------------|
 | Área de Conhecimento | Campo de saber, com nome, descrição e palavras-chave, ao qual as expertises dos docentes se relacionam e que as oportunidades podem exigir. | RN-MM-02, RN-MM-10 |
-| Compatibilidade | Correspondência registrada entre uma oportunidade e um docente, com grau de aderência e justificativa, sugerida pelo cálculo e validada pelo Gestor. | RN-MM-13, RN-MM-15, D3 |
+| Compatibilidade | Correspondência registrada entre uma oportunidade e um docente, com grau de aderência e justificativa, sugerida pelo cálculo e validada pelo Gestor. | RN-MM-13, RN-MM-15 |
 | Desafio/Oportunidade | Problema a resolver ou possibilidade de inovação de um setor industrial, com descrição, data de identificação, prioridade, situação e áreas de conhecimento exigidas. | RN-MM-08 a RN-MM-10 |
 | Docente | Professor vinculado ao departamento, com dados cadastrais, expertises e portfólio acadêmico, que pode contribuir para soluções industriais. | RN-MM-01, RN-MM-02 |
 | Empresa | Organização que atua em um ou mais setores industriais, com dados cadastrais, área de atuação e contatos, e que pode se interessar por oportunidades. | RN-MM-11, RN-MM-12 |
 | Expertise | Conhecimento específico dominado por um docente, relacionado a uma área de conhecimento; pode ser compartilhada por vários docentes. | RN-MM-02, RN-MM-03 |
-| Grau de Aderência | Medida, de 0 a 100, de quanto um docente atende a uma oportunidade; calculado pelo sistema e podendo ser ajustado pelo Gestor com justificativa. | RN-MM-15, D3 |
+| Grau de Aderência | Medida, de 0 a 100, de quanto um docente atende a uma oportunidade; calculado pelo sistema e podendo ser ajustado pelo Gestor com justificativa. | RN-MM-15 |
 | Manifestação de Interesse | Registro de que uma empresa demonstra interesse em uma oportunidade e, se for o caso, em implementar soluções relacionadas a ela. | RN-MM-14 |
-| Parceria | Acordo entre o departamento, docentes selecionados e uma empresa para desenvolver um projeto a partir de uma proposta aceita; uma oportunidade pode gerar várias parcerias, e a primeira leva a oportunidade ao estado Parceria firmada. | D1, D50, RN-MM-14 |
+| Parceria | Acordo entre o departamento, docentes selecionados e uma empresa para desenvolver um projeto a partir de uma proposta aceita; uma oportunidade pode gerar várias parcerias, e a primeira leva a oportunidade ao estado Parceria firmada. | RN-MM-14 |
 | Portfólio Acadêmico | Conjunto de projetos acadêmicos que um docente coordenou ou orientou, usado para verificar sua experiência prévia. | RN-MM-04, RN-MM-16 |
-| Projeto Acadêmico | Trabalho de pesquisa, desenvolvimento ou inovação com título, descrição, período, objetivos, resultados, situação e áreas de conhecimento, indicadas pelo Docente, que compõe o portfólio de docentes. | RN-MM-05, RN-MM-06, D26 |
-| Proposta | Documento elaborado pelo departamento, a partir de uma oportunidade, que descreve a solução a oferecer e os docentes selecionados e se destina a uma empresa interessada; cada empresa interessada recebe no máximo uma proposta por oportunidade, e ao menos uma é exigida antes da negociação. | D28, D30, D50, RN-MM-14 |
+| Projeto Acadêmico | Trabalho de pesquisa, desenvolvimento ou inovação com título, descrição, período, objetivos, resultados, situação e áreas de conhecimento, indicadas pelo Docente, que compõe o portfólio de docentes. | RN-MM-05, RN-MM-06 |
+| Proposta | Documento elaborado pelo departamento, a partir de uma oportunidade, que descreve a solução a oferecer e os docentes selecionados e se destina a uma empresa interessada; cada empresa interessada recebe no máximo uma proposta por oportunidade, e ao menos uma é exigida antes da negociação. | RN-MM-14 |
 | Setor Industrial | Segmento produtivo (por exemplo, alimentos ou energia), com identificação, descrição e áreas de atuação, que reúne empresas e apresenta desafios e oportunidades. | RN-MM-07, RN-MM-08, RN-MM-12 |
 
 Table: Quadro 1 — Glossário do sistema
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11).
 :::
 
 # 3 Requisitos Funcionais
@@ -97,64 +98,69 @@ Prioridade: Alta = sem ele o processo central (oportunidade → compatibilidade 
 | ID | Nome | Descrição | Prioridade | Ator | Origem |
 |-------|-----------------|--------------------------------------------|----------|----------|------------|
 | RF01 | Manter docentes | O sistema deve permitir que o Gestor inclua, altere e inative docentes do departamento, com nome, matrícula, e-mail, departamento e currículo resumido. | Alta | Gestor | RN-MM-01, RN-MM-02 |
-| RF02 | Manter áreas de conhecimento | O sistema deve permitir que o Gestor inclua, altere e inative áreas de conhecimento, com nome, descrição e palavras-chave. | Alta | Gestor | RN-MM-02, RN-MM-10, D8 |
-| RF03 | Manter expertises | O sistema deve permitir que o Docente associe e remova suas expertises, cada uma relacionada a uma área de conhecimento. | Alta | Docente | RN-MM-02, RN-MM-03, D8 |
-| RF04 | Manter setores industriais e empresas | O sistema deve permitir que o Gestor mantenha setores industriais e empresas, vinculando cada empresa a um ou mais setores e registrando seus contatos. | Alta | Gestor | RN-MM-07, RN-MM-11, RN-MM-12, D8 |
+| RF02 | Manter áreas de conhecimento | O sistema deve permitir que o Gestor inclua, altere e inative áreas de conhecimento, com nome, descrição e palavras-chave. | Alta | Gestor | RN-MM-02, RN-MM-10 |
+| RF03 | Manter expertises | O sistema deve permitir que o Docente associe e remova suas expertises, cada uma relacionada a uma área de conhecimento. | Alta | Docente | RN-MM-02, RN-MM-03 |
+| RF04 | Manter setores industriais e empresas | O sistema deve permitir que o Gestor mantenha setores industriais e empresas, vinculando cada empresa a um ou mais setores e registrando seus contatos. | Alta | Gestor | RN-MM-07, RN-MM-11, RN-MM-12 |
 
 Table: Quadro 2 — Requisitos funcionais — módulo Cadastros
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional; RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11).
 :::
 
 ## Módulo Portfólio
 | ID | Nome | Descrição | Prioridade | Ator | Origem |
 |-------|-----------------|--------------------------------------------|----------|----------|------------|
-| RF05 | Manter portfólio acadêmico | O sistema deve permitir que o Docente registre e atualize os projetos acadêmicos de seu portfólio, informando título, descrição, período, objetivos, resultados, situação, as áreas de conhecimento do projeto e seu papel de coordenador ou orientador. | Alta | Docente | RN-MM-04, RN-MM-05, RN-MM-06, D8, D26 |
+| RF05 | Manter portfólio acadêmico | O sistema deve permitir que o Docente registre e atualize os projetos acadêmicos de seu portfólio, informando título, descrição, período, objetivos, resultados, situação, as áreas de conhecimento do projeto e seu papel de coordenador ou orientador. | Alta | Docente | RN-MM-04, RN-MM-05, RN-MM-06 |
 
 Table: Quadro 3 — Requisitos funcionais — módulo Portfólio
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional; RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11).
 :::
 
 ## Módulo Oportunidades
 | ID | Nome | Descrição | Prioridade | Ator | Origem |
 |-------|-----------------|--------------------------------------------|----------|----------|------------|
-| RF06 | Registrar desafio/oportunidade | O sistema deve permitir que o Gestor registre um desafio/oportunidade em um setor industrial, com descrição, data de identificação, prioridade e áreas de conhecimento exigidas, iniciando no estado Identificada. | Alta | Gestor | RN-MM-08, RN-MM-09, RN-MM-10, D1, D8, RN08 |
-| RF07 | Alterar estado da oportunidade | O sistema deve permitir que o Gestor altere o estado de uma oportunidade entre Identificada, Em análise, Docentes selecionados, Proposta em elaboração, Em negociação, Parceria firmada e Descartada, registrando data, autor e histórico de cada mudança, conforme as transições permitidas. | Alta | Gestor | D1, D7, RN08, RN09, RN13 |
+| RF06 | Registrar desafio/oportunidade | O sistema deve permitir que o Gestor registre um desafio/oportunidade em um setor industrial, com descrição, data de identificação, prioridade e áreas de conhecimento exigidas, iniciando no estado Identificada. | Alta | Gestor | RN-MM-08, RN-MM-09, RN-MM-10, RN08 |
+| RF07 | Alterar estado da oportunidade | O sistema deve permitir que o Gestor altere o estado de uma oportunidade entre Identificada, Em análise, Docentes selecionados, Proposta em elaboração, Em negociação, Parceria firmada e Descartada, registrando data, autor e histórico de cada mudança, conforme as transições permitidas. | Alta | Gestor | RN08, RN09, RN13 |
 
 Table: Quadro 4 — Requisitos funcionais — módulo Oportunidades
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional; RN = regra de negócio do sistema (Quadro 10); RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11).
 :::
 
 ## Módulo Compatibilidade
 | ID | Nome | Descrição | Prioridade | Ator | Origem |
 |-------|-----------------|--------------------------------------------|----------|----------|------------|
-| RF08 | Calcular grau de aderência | O sistema deve calcular, para uma oportunidade selecionada pelo Gestor, o grau de aderência de cada docente, a partir das áreas de conhecimento exigidas e do portfólio acadêmico, e listar os docentes em ordem decrescente. | Alta | Gestor | RN-MM-13, RN-MM-15, D3, RN01, RN02, RN03, RN04 |
-| RF09 | Validar compatibilidade | O sistema deve permitir que o Gestor valide, ajuste ou rejeite o grau de aderência sugerido de um docente para uma oportunidade, exigindo justificativa, e registre a compatibilidade. | Alta | Gestor | RN-MM-15, D3, RN04, RN05, RN06 |
-| RF10 | Selecionar docentes da oportunidade | O sistema deve permitir que o Gestor selecione, entre os docentes com compatibilidade validada, os que participarão da oportunidade, indicando o coordenador, e avance a oportunidade ao estado Docentes selecionados. | Alta | Gestor | RN-MM-13, RN-MM-16, D1, RN07, RN08 |
+| RF08 | Calcular grau de aderência | O sistema deve calcular, para uma oportunidade selecionada pelo Gestor, o grau de aderência de cada docente, a partir das áreas de conhecimento exigidas e do portfólio acadêmico, e listar os docentes em ordem decrescente. | Alta | Gestor | RN-MM-13, RN-MM-15, RN01, RN02, RN03, RN04 |
+| RF09 | Validar compatibilidade | O sistema deve permitir que o Gestor valide, ajuste ou rejeite o grau de aderência sugerido de um docente para uma oportunidade, exigindo justificativa, e registre a compatibilidade. | Alta | Gestor | RN-MM-15, RN04, RN05, RN06 |
+| RF10 | Selecionar docentes da oportunidade | O sistema deve permitir que o Gestor selecione, entre os docentes com compatibilidade validada, os que participarão da oportunidade, indicando o coordenador, e avance a oportunidade ao estado Docentes selecionados. | Alta | Gestor | RN-MM-13, RN-MM-16, RN07, RN08 |
 | RF11 | Consultar projetos anteriores relacionados | O sistema deve permitir que o Gestor consulte, para uma oportunidade, os projetos acadêmicos dos portfólios que se relacionam às suas áreas de conhecimento, com o docente e o papel exercido. | Média | Gestor | RN-MM-16, Q-02, Q-07, RN03 |
 
 Table: Quadro 5 — Requisitos funcionais — módulo Compatibilidade
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional; RN = regra de negócio do sistema (Quadro 10); RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11); Q-nn = pergunta nº nn da seção 5 do minimundo (Quadro 12).
 :::
 
 ## Módulo Interesse e Parceria
 | ID | Nome | Descrição | Prioridade | Ator | Origem |
 |-------|-----------------|--------------------------------------------|----------|----------|------------|
 | RF12 | Registrar manifestação de interesse | O sistema deve permitir que o Representante de Empresa registre a manifestação de interesse de sua empresa em uma oportunidade de um setor em que ela atua, indicando se deseja implementar a solução. | Alta | Representante de Empresa | RN-MM-14, RN11 |
-| RF13 | Registrar desfecho da parceria | O sistema deve permitir que o Gestor registre cada parceria firmada a partir de uma proposta aceita, com a empresa e os docentes envolvidos, as propostas não aceitas, ou o descarte da oportunidade com motivo. | Alta | Gestor | D1, RN-MM-14, RN09, RN10, D50 |
-| RF18 | Registrar proposta | O sistema deve permitir que o Gestor registre as propostas de uma oportunidade no estado Proposta em elaboração, uma por empresa com manifestação de interesse, com resumo da solução e docentes selecionados. | Alta | Gestor | D1, D28, D30, RN13, D50 |
+| RF13 | Registrar desfecho da parceria | O sistema deve permitir que o Gestor registre cada parceria firmada a partir de uma proposta aceita, com a empresa e os docentes envolvidos, as propostas não aceitas, ou o descarte da oportunidade com motivo. | Alta | Gestor | RN-MM-14, RN09, RN10 |
+| RF18 | Registrar proposta | O sistema deve permitir que o Gestor registre as propostas de uma oportunidade no estado Proposta em elaboração, uma por empresa com manifestação de interesse, com resumo da solução e docentes selecionados. | Alta | Gestor | RN13 |
 
 Table: Quadro 6 — Requisitos funcionais — módulo Interesse e Parceria
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional; RN = regra de negócio do sistema (Quadro 10); RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11).
 :::
 
 ## Módulo Consultas
@@ -168,7 +174,8 @@ Fonte: elaborado pelos autores (2026).
 Table: Quadro 7 — Requisitos funcionais — módulo Consultas
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional; RN = regra de negócio do sistema (Quadro 10); RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11); Q-nn = pergunta nº nn da seção 5 do minimundo (Quadro 12).
 :::
 
 ## Natureza dos requisitos funcionais
@@ -185,7 +192,8 @@ Os 18 requisitos funcionais foram classificados pela natureza da operação, par
 Table: Quadro 8 — Natureza dos requisitos funcionais
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional (Quadros 2 a 7).
 :::
 
 Dois em cada três requisitos (67%) envolvem cálculo, validação, mudança de estado ou cruzamento de informações. O registro de desafio/oportunidade (RF06) foi contado como cadastro, embora inicie o ciclo de vida, para não superestimar a complexidade do sistema. As sete perguntas que o minimundo espera responder (Q-01 a Q-07) são atendidas por ao menos um requisito funcional; a correspondência completa está no Quadro 12 (Apêndice A).
@@ -194,42 +202,44 @@ Dois em cada três requisitos (67%) envolvem cálculo, validação, mudança de 
 
 | ID | Categoria | Descrição | Critério de aceitação | Origem |
 |-------|-------------|-----------------------------------|---------------------------------|------------|
-| RNF01 | Desempenho | A consulta de docentes compatíveis com uma oportunidade (RF14) deve retornar o resultado rapidamente. | 95% das consultas em até 3 s, com 500 docentes e 200 oportunidades cadastrados. | RF14, D35 |
-| RNF02 | Desempenho | O cálculo do grau de aderência de uma oportunidade para todos os docentes (RF08) deve ser concluído em tempo adequado ao uso interativo. | 95% dos cálculos em até 10 s, com 500 docentes e 200 oportunidades cadastrados. | RF08, RN02, D35 |
-| RNF03 | Segurança | O acesso deve exigir identificação do usuário, e cada ator (Gestor, Docente, Representante de Empresa) só pode executar as funções do seu papel; por exemplo, só o Gestor altera o estado da oportunidade (RN08). | Em testes de acesso, 100% das tentativas de executar função de outro papel são bloqueadas e registradas. | D2, D8, RN08 |
-| RNF04 | Privacidade/LGPD | Os dados pessoais de docentes e os contatos de empresas só devem ser visíveis a quem tem papel autorizado e devem poder ser excluídos ou anonimizados a pedido do titular. | Pedido de exclusão ou anonimização atendido em até 30 dias; em testes de acesso, 0 acessos a dados pessoais por papel não autorizado. | RN-MM-02, RN-MM-11, Diretriz (LGPD) |
+| RNF01 | Desempenho | A consulta de docentes compatíveis com uma oportunidade (RF14) deve retornar o resultado rapidamente. | 95% das consultas em até 3 s, com 500 docentes e 200 oportunidades cadastrados. | RF14 |
+| RNF02 | Desempenho | O cálculo do grau de aderência de uma oportunidade para todos os docentes (RF08) deve ser concluído em tempo adequado ao uso interativo. | 95% dos cálculos em até 10 s, com 500 docentes e 200 oportunidades cadastrados. | RF08, RN02 |
+| RNF03 | Segurança | O acesso deve exigir identificação do usuário, e cada ator (Gestor, Docente, Representante de Empresa) só pode executar as funções do seu papel; por exemplo, só o Gestor altera o estado da oportunidade (RN08). | Em testes de acesso, 100% das tentativas de executar função de outro papel são bloqueadas e registradas. | RN08 |
+| RNF04 | Privacidade/LGPD | Os dados pessoais de docentes e os contatos de empresas só devem ser visíveis a quem tem papel autorizado e devem poder ser excluídos ou anonimizados a pedido do titular. | Pedido de exclusão ou anonimização atendido em até 30 dias; em testes de acesso, 0 acessos a dados pessoais por papel não autorizado. | LGPD (Lei 13.709/2018) |
 | RNF05 | Usabilidade | Um Gestor sem treinamento prévio deve conseguir registrar uma oportunidade e calcular a aderência dos docentes sem ajuda externa. | Em teste com 5 usuários, ao menos 80% concluem a tarefa em até 30 minutos. | RF06, RF08 |
-| RNF06 | Disponibilidade | O sistema deve estar disponível no horário de uso do departamento. | Disponibilidade mínima de 95% por mês, em horário comercial (segunda a sexta, das 8h às 18h). | Diretriz |
-| RNF07 | Manutenibilidade | A nota mínima de sugestão, os pesos da fórmula do grau de aderência e o teto de projetos anteriores devem poder ser alterados sem reescrever o sistema, e o histórico de mudanças de estado das oportunidades deve ser conservado. | Cada parâmetro (RN02, RN04) é alterável por configuração, sem nova versão do sistema; histórico de mudanças de estado guardado por 5 anos. | RN02, RN04, RF07, D21, D23, D37 |
+| RNF06 | Disponibilidade | O sistema deve estar disponível no horário de uso do departamento. | Disponibilidade mínima de 95% por mês, em horário comercial (segunda a sexta, das 8h às 18h). | — |
+| RNF07 | Manutenibilidade | A nota mínima de sugestão, os pesos da fórmula do grau de aderência e o teto de projetos anteriores devem poder ser alterados sem reescrever o sistema, e o histórico de mudanças de estado das oportunidades deve ser conservado. | Cada parâmetro (RN02, RN04) é alterável por configuração, sem nova versão do sistema; histórico de mudanças de estado guardado por 5 anos. | RN02, RN04, RF07 |
 
 Table: Quadro 9 — Requisitos não funcionais
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional (Quadros 2 a 7); RNF = requisito não funcional; RN = regra de negócio do sistema (Quadro 10); LGPD = Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018).
 :::
 
 # 5 Regras de Negócio
 
 | ID | Nome | Descrição | Tipo | RFs relacionados | Origem |
 |------|---------------|-------------------------------------------|----------|------------|--------------|
-| RN01 | Cobertura das áreas exigidas | A cobertura de um docente em uma oportunidade é a razão entre o número de áreas de conhecimento exigidas pela oportunidade que o docente possui como expertise e o número total de áreas exigidas. | Cálculo | RF08 | RN-MM-10, RN-MM-13, D21 |
-| RN02 | Grau de aderência | O grau de aderência, de 0 a 100, é 70 × cobertura (RN01) + 30 × (menor valor entre o número de projetos anteriores relacionados e 3) ÷ 3. | Cálculo | RF08 | RN-MM-15, D3, D21 |
-| RN03 | Projeto anterior relacionado | É projeto anterior relacionado todo projeto acadêmico do portfólio do docente, como coordenador ou orientador, cujas áreas de conhecimento, indicadas pelo Docente ao registrá-lo, incluem ao menos uma área de conhecimento exigida pela oportunidade. | Derivação | RF08, RF11 | RN-MM-04, RN-MM-16, D22, D26 |
-| RN04 | Nota mínima para sugestão | Um docente só é sugerido para uma oportunidade quando seu grau de aderência é igual ou superior a 50; abaixo disso, a compatibilidade só existe se o Gestor a registrar manualmente, com justificativa. | Restrição | RF08, RF09 | RN-MM-13, D23 |
-| RN05 | Justificativa obrigatória | Toda compatibilidade registrada pelo Gestor, validada, ajustada, rejeitada ou manual, deve ter justificativa de no mínimo 30 caracteres; sem ela, a compatibilidade não pode ser confirmada. | Restrição | RF09 | RN-MM-15, D3, D25 |
-| RN06 | Valor validado prevalece | Quando o Gestor ajusta o grau de aderência, o valor ajustado passa a ser o valor oficial da compatibilidade, e o valor calculado pelo sistema permanece registrado para consulta. | Derivação | RF09, RF14 | RN-MM-15, D3 |
-| RN07 | Docentes mínimos da oportunidade | Uma oportunidade só pode ter docentes selecionados se cada um tiver compatibilidade validada, e só pode seguir adiante se houver ao menos um docente selecionado, que deve ser o coordenador. | Restrição | RF10 | RN-MM-06, RN-MM-13, D25 |
-| RN08 | Sequência do ciclo de vida | A oportunidade percorre, na ordem, os estados Identificada, Em análise, Docentes selecionados, Proposta em elaboração, Em negociação e Parceria firmada; apenas o Gestor altera o estado, sem pular estados. A passagem para Em análise exige ao menos uma área de conhecimento exigida, a passagem para Docentes selecionados exige a RN07 e a passagem para Em negociação exige a RN13. | Fluxo/Estado | RF06, RF07, RF10 | D1, D7, D24, D28 |
-| RN09 | Descarte e estados finais | Uma oportunidade pode ser descartada a partir de qualquer estado que não seja final, mediante motivo obrigatório. Parceria firmada e Descartada são estados finais: a oportunidade não muda mais de estado; em Parceria firmada, ainda pode receber novas parcerias conforme a RN10. | Fluxo/Estado | RF07, RF13 | D1, D24, D51 |
-| RN10 | Condições da parceria firmada | Uma oportunidade só passa de Em negociação para Parceria firmada quando ao menos uma proposta for aceita pela empresa destinatária, com os docentes selecionados mantidos. Cada proposta aceita gera uma parceria. Em Parceria firmada, as propostas ainda pendentes podem gerar novas parcerias ou ser registradas como não aceitas. | Restrição | RF13 | RN-MM-14, D1, D24, D50, D51 |
+| RN01 | Cobertura das áreas exigidas | A cobertura de um docente em uma oportunidade é a razão entre o número de áreas de conhecimento exigidas pela oportunidade que o docente possui como expertise e o número total de áreas exigidas. | Cálculo | RF08 | RN-MM-10, RN-MM-13 |
+| RN02 | Grau de aderência | O grau de aderência, de 0 a 100, é 70 × cobertura (RN01) + 30 × (menor valor entre o número de projetos anteriores relacionados e 3) ÷ 3. | Cálculo | RF08 | RN-MM-15 |
+| RN03 | Projeto anterior relacionado | É projeto anterior relacionado todo projeto acadêmico do portfólio do docente, como coordenador ou orientador, cujas áreas de conhecimento, indicadas pelo Docente ao registrá-lo, incluem ao menos uma área de conhecimento exigida pela oportunidade. | Derivação | RF08, RF11 | RN-MM-04, RN-MM-16 |
+| RN04 | Nota mínima para sugestão | Um docente só é sugerido para uma oportunidade quando seu grau de aderência é igual ou superior a 50; abaixo disso, a compatibilidade só existe se o Gestor a registrar manualmente, com justificativa. | Restrição | RF08, RF09 | RN-MM-13 |
+| RN05 | Justificativa obrigatória | Toda compatibilidade registrada pelo Gestor, validada, ajustada, rejeitada ou manual, deve ter justificativa de no mínimo 30 caracteres; sem ela, a compatibilidade não pode ser confirmada. | Restrição | RF09 | RN-MM-15 |
+| RN06 | Valor validado prevalece | Quando o Gestor ajusta o grau de aderência, o valor ajustado passa a ser o valor oficial da compatibilidade, e o valor calculado pelo sistema permanece registrado para consulta. | Derivação | RF09, RF14 | RN-MM-15 |
+| RN07 | Docentes mínimos da oportunidade | Uma oportunidade só pode ter docentes selecionados se cada um tiver compatibilidade validada, e só pode seguir adiante se houver ao menos um docente selecionado, que deve ser o coordenador. | Restrição | RF10 | RN-MM-06, RN-MM-13 |
+| RN08 | Sequência do ciclo de vida | A oportunidade percorre, na ordem, os estados Identificada, Em análise, Docentes selecionados, Proposta em elaboração, Em negociação e Parceria firmada; apenas o Gestor altera o estado, sem pular estados. A passagem para Em análise exige ao menos uma área de conhecimento exigida, a passagem para Docentes selecionados exige a RN07 e a passagem para Em negociação exige a RN13. | Fluxo/Estado | RF06, RF07, RF10 | Minimundo, seção 4 |
+| RN09 | Descarte e estados finais | Uma oportunidade pode ser descartada a partir de qualquer estado que não seja final, mediante motivo obrigatório. Parceria firmada e Descartada são estados finais: a oportunidade não muda mais de estado; em Parceria firmada, ainda pode receber novas parcerias conforme a RN10. | Fluxo/Estado | RF07, RF13 | Minimundo, seção 4 |
+| RN10 | Condições da parceria firmada | Uma oportunidade só passa de Em negociação para Parceria firmada quando ao menos uma proposta for aceita pela empresa destinatária, com os docentes selecionados mantidos. Cada proposta aceita gera uma parceria. Em Parceria firmada, as propostas ainda pendentes podem gerar novas parcerias ou ser registradas como não aceitas. | Restrição | RF13 | RN-MM-14 |
 | RN11 | Interesse apenas em setor de atuação | Uma empresa só pode manifestar interesse em oportunidades de setores industriais em que atua. | Restrição | RF12 | RN-MM-11, RN-MM-12, RN-MM-14 |
-| RN12 | Oportunidade sem docentes compatíveis | Uma oportunidade é considerada sem docentes compatíveis quando nenhum docente atinge a nota mínima (RN04) e nenhuma compatibilidade foi registrada manualmente. | Derivação | RF17 | Q-06, RN-MM-13, D23 |
-| RN13 | Proposta registrada antes da negociação | Uma oportunidade só passa de Proposta em elaboração para Em negociação se houver ao menos uma proposta registrada. Cada proposta se destina a uma única empresa com manifestação de interesse na oportunidade e inclui os docentes selecionados; cada empresa interessada recebe no máximo uma proposta por oportunidade. | Restrição | RF07, RF18 | D1, D28, D30, D32, D50 |
+| RN12 | Oportunidade sem docentes compatíveis | Uma oportunidade é considerada sem docentes compatíveis quando nenhum docente atinge a nota mínima (RN04) e nenhuma compatibilidade foi registrada manualmente. | Derivação | RF17 | Q-06, RN-MM-13 |
+| RN13 | Proposta registrada antes da negociação | Uma oportunidade só passa de Proposta em elaboração para Em negociação se houver ao menos uma proposta registrada. Cada proposta se destina a uma única empresa com manifestação de interesse na oportunidade e inclui os docentes selecionados; cada empresa interessada recebe no máximo uma proposta por oportunidade. | Restrição | RF07, RF18 | RN-MM-14, Minimundo, seção 4 |
 
 Table: Quadro 10 — Regras de negócio
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional (Quadros 2 a 7); RN = regra de negócio do sistema; RN-MM-nn = regra nº nn da seção 2 do minimundo (Quadro 11); Q-nn = pergunta nº nn da seção 5 do minimundo (Quadro 12).
 :::
 
 # Apêndice A — Rastreabilidade
@@ -257,7 +267,8 @@ Fonte: elaborado pelos autores (2026).
 Table: Quadro 11 — Regras do minimundo (RN-MM) × requisitos e regras de negócio
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional (Quadros 2 a 7); RN = regra de negócio do sistema (Quadro 10); RN-MM-nn = regra nº nn da seção 2 do minimundo.
 :::
 
 ## Perguntas do minimundo (Q) × requisitos
@@ -274,7 +285,8 @@ Fonte: elaborado pelos autores (2026).
 Table: Quadro 12 — Perguntas do minimundo (Q-01 a Q-07) × requisitos e regras de negócio
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional (Quadros 2 a 7); RN = regra de negócio do sistema (Quadro 10); Q-nn = pergunta nº nn da seção 5 do minimundo.
 :::
 
 ## RFs × RNFs de apoio
@@ -314,7 +326,8 @@ Nota: o sistema (azul escuro), dentro de sua fronteira, troca seis fluxos de inf
 Table: Quadro 13 — Fluxos de informação do diagrama de contexto
 
 ::: {custom-style="Fonte"}
-Fonte: elaborado pelos autores (2026).
+Fonte: elaborado pelos autores (2026).\
+Nota: RF = requisito funcional (Quadros 2 a 7); Q-nn = pergunta nº nn da seção 5 do minimundo (Quadro 12); F1 a F6 = fluxos de informação da Figura 1.
 :::
 
 ```{=openxml}
